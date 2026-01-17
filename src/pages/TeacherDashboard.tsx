@@ -1,4 +1,4 @@
-import { Users, FileText, CheckCircle2, TrendingUp, BookOpen, Upload, Clock, ChevronRight } from "lucide-react";
+import { Users, FileText, CheckCircle2, TrendingUp, BookOpen, Upload, Clock, ChevronRight, Megaphone } from "lucide-react";
 import { DashboardLayout } from "@/components/DashboardLayout";
 import { StatCard } from "@/components/StatCard";
 import { Button } from "@/components/ui/button";
@@ -20,6 +20,11 @@ const recentActivity = [
   { id: 1, action: "Uploaded lecture notes", course: "CSC 202", time: "1 hour ago" },
   { id: 2, action: "Graded 5 assignments", course: "CSC 305", time: "3 hours ago" },
   { id: 3, action: "Posted new assignment", course: "CSC 301", time: "Yesterday" },
+];
+
+const announcements = [
+  { id: 1, title: "Server Maintenance Scheduled", content: "The system will be down for maintenance on Sunday at 2 AM.", date: "2026-01-18" },
+  { id: 2, title: "New Semester Registration", content: "Registration for the new semester is now open for all students.", date: "2026-01-15" }
 ];
 
 const TeacherDashboard = () => {
@@ -89,7 +94,7 @@ const TeacherDashboard = () => {
             </div>
             <div className="space-y-4">
               {courses.map((course) => (
-                <div 
+                <div
                   key={course.id}
                   className="flex items-center justify-between p-4 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-pointer"
                 >
@@ -132,7 +137,7 @@ const TeacherDashboard = () => {
             </div>
             <div className="space-y-4">
               {recentActivity.map((activity) => (
-                <div 
+                <div
                   key={activity.id}
                   className="p-3 rounded-lg bg-secondary/30"
                 >
@@ -165,7 +170,7 @@ const TeacherDashboard = () => {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {pendingGrading.map((item) => (
-              <div 
+              <div
                 key={item.id}
                 className="p-5 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-pointer group"
               >

@@ -1,21 +1,24 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
-import { 
-  Home, 
-  BookOpen, 
-  FileText, 
-  MessageSquare, 
-  User, 
-  Upload, 
-  Users, 
-  BarChart3, 
-  Bell, 
+import {
+  Home,
+  BookOpen,
+  FileText,
+  MessageSquare,
+  User,
+  Upload,
+  Users,
+  BarChart3,
+  Bell,
   Settings,
   Menu,
   X,
   LogOut,
-  GraduationCap
+  GraduationCap,
+  Bot,
+  ClipboardCheck,
+  FileQuestion
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -34,9 +37,11 @@ interface DashboardLayoutProps {
 
 const studentNav: NavItem[] = [
   { icon: Home, label: "Dashboard", href: "/student" },
-  { icon: BookOpen, label: "Courses", href: "/student/courses" },
+  { icon: BookOpen, label: "All Courses", href: "/student/enrollment" },
+  { icon: BookOpen, label: "My Courses", href: "/student/courses" },
   { icon: FileText, label: "Assignments", href: "/student/assignments" },
-  { icon: MessageSquare, label: "Messages", href: "/student/messages" },
+  { icon: ClipboardCheck, label: "Take Test", href: "/student/test" },
+  { icon: Bot, label: "Use AI", href: "https://hexy.hextantlabs.com/" },
   { icon: User, label: "Profile", href: "/student/profile" },
 ];
 
@@ -45,7 +50,7 @@ const teacherNav: NavItem[] = [
   { icon: BookOpen, label: "My Courses", href: "/teacher/courses" },
   { icon: Upload, label: "Materials", href: "/teacher/materials" },
   { icon: FileText, label: "Grading", href: "/teacher/grading" },
-  { icon: MessageSquare, label: "Messages", href: "/teacher/messages" },
+  { icon: FileQuestion, label: "Tests", href: "/teacher/tests" },
 ];
 
 const adminNav: NavItem[] = [
@@ -75,10 +80,10 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
   const navItems = navByRole[role];
 
   return (
-    <div className="min-h-screen bg-background flex">
+    <div className="h-screen bg-background flex overflow-hidden">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-background/80 backdrop-blur-sm z-40 lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
@@ -97,7 +102,7 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
                 <GraduationCap className="w-6 h-6 text-primary-foreground" />
               </div>
               <div>
-                <h1 className="font-display font-bold text-lg text-sidebar-foreground">Uni Connect</h1>
+                <h1 className="font-display font-bold text-lg text-sidebar-foreground">KDU NACOS CONNECT</h1>
                 <p className="text-xs text-muted-foreground">{roleLabels[role]}</p>
               </div>
             </Link>
@@ -107,14 +112,21 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
           <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
             {navItems.map((item) => {
               const isActive = location.pathname === item.href;
+              const isExternal = item.href.startsWith("http");
+
+              const LinkComponent = isExternal ? "a" : Link;
+              const linkProps = isExternal
+                ? { href: item.href, target: "_blank", rel: "noopener noreferrer" }
+                : { to: item.href };
+
               return (
-                <Link
+                <LinkComponent
                   key={item.href}
-                  to={item.href}
+                  {...linkProps as any}
                   className={cn(
                     "flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300",
-                    isActive 
-                      ? "bg-primary/10 text-primary shadow-[0_0_20px_hsl(142_76%_45%_/_0.1)]" 
+                    isActive
+                      ? "bg-primary/10 text-primary shadow-[0_0_20px_hsl(142_76%_45%_/_0.1)]"
                       : "text-muted-foreground hover:bg-sidebar-accent hover:text-sidebar-foreground"
                   )}
                 >
@@ -123,7 +135,7 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
                   {isActive && (
                     <div className="ml-auto w-1.5 h-1.5 rounded-full bg-primary animate-pulse-glow" />
                   )}
-                </Link>
+                </LinkComponent>
               );
             })}
           </nav>
@@ -149,12 +161,12 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
       </aside>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col h-full overflow-hidden">
         {/* Top bar */}
         <header className="sticky top-0 z-30 h-16 bg-background/80 backdrop-blur-xl border-b border-border flex items-center px-4 lg:px-8">
-          <Button 
-            variant="ghost" 
-            size="icon" 
+          <Button
+            variant="ghost"
+            size="icon"
             className="lg:hidden mr-4"
             onClick={() => setSidebarOpen(true)}
           >
@@ -172,7 +184,7 @@ export function DashboardLayout({ children, role, userName = "User" }: Dashboard
         </header>
 
         {/* Page content */}
-        <main className="flex-1 p-4 lg:p-8">
+        <main className="flex-1 overflow-y-auto p-4 lg:p-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}

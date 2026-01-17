@@ -1,8 +1,17 @@
 import { motion } from "framer-motion";
 import { GraduationCap, BookOpen, Shield, Users } from "lucide-react";
 import { RoleCard } from "@/components/RoleCard";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handlePortalClick = (role: string) => {
+    // Always redirect to login with the selected role
+    navigate("/login", { state: { role } });
+  };
+
   return (
     <div className="min-h-screen bg-background relative overflow-hidden">
       {/* Background gradient effects */}
@@ -18,7 +27,7 @@ const Index = () => {
             <div className="w-10 h-10 rounded-xl bg-primary flex items-center justify-center shadow-[0_0_20px_hsl(142_76%_45%_/_0.3)]">
               <GraduationCap className="w-6 h-6 text-primary-foreground" />
             </div>
-            <span className="font-display font-bold text-xl">Uni Connect</span>
+            <span className="font-display font-bold text-xl">KDU NACOS CONNECT</span>
           </div>
           <div className="text-sm text-muted-foreground">
             NACOS Department Portal
@@ -56,7 +65,7 @@ const Index = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12"
           >
-            Connect with your courses, teachers, and fellow students. 
+            Connect with your courses, teachers, and fellow students.
             Manage assignments, access resources, and stay updated — all in one place.
           </motion.p>
 
@@ -91,7 +100,7 @@ const Index = () => {
             className="text-center mb-12"
           >
             <h2 className="text-2xl font-display font-semibold mb-4">Select Your Portal</h2>
-            <p className="text-muted-foreground">Choose your role to access your personalized dashboard</p>
+            <p className="text-muted-foreground">Choose your role to access your personalized dashboard. <span className="font-medium text-primary">Login is required.</span></p>
           </motion.div>
 
           <div className="grid md:grid-cols-3 gap-6">
@@ -99,7 +108,8 @@ const Index = () => {
               title="Student"
               description="Access courses, submit assignments, and connect with teachers."
               icon={BookOpen}
-              href="/student"
+              href="#"
+              onClick={(e) => { e.preventDefault(); handlePortalClick("student"); }}
               features={[
                 "View course materials",
                 "Submit assignments",
@@ -112,7 +122,8 @@ const Index = () => {
               title="Teacher"
               description="Manage courses, upload materials, and grade student work."
               icon={Users}
-              href="/teacher"
+              href="#"
+              onClick={(e) => { e.preventDefault(); handlePortalClick("teacher"); }}
               features={[
                 "Upload course content",
                 "Create assignments",
@@ -125,7 +136,8 @@ const Index = () => {
               title="Admin"
               description="Oversee the entire system, manage users and monitor analytics."
               icon={Shield}
-              href="/admin"
+              href="#"
+              onClick={(e) => { e.preventDefault(); handlePortalClick("admin"); }}
               features={[
                 "User management",
                 "System analytics",

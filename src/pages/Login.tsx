@@ -11,7 +11,9 @@ import { toast } from "sonner";
 const Login = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const [role, setRole] = useState<"student" | "teacher" | "admin">("student");
+    const [role, setRole] = useState<"student" | "teacher" | "admin">(
+        (location.state as any)?.role || "student"
+    );
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +53,7 @@ const Login = () => {
                         <p className="text-muted-foreground">Sign in to your academic portal</p>
                     </div>
 
-                    <Tabs defaultValue="student" onValueChange={(v) => setRole(v as any)} className="w-full">
+                    <Tabs value={role} onValueChange={(v) => setRole(v as any)} className="w-full">
                         <TabsList className="grid w-full grid-cols-3 mb-8">
                             <TabsTrigger value="student">Student</TabsTrigger>
                             <TabsTrigger value="teacher">Teacher</TabsTrigger>

@@ -12,6 +12,21 @@ import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
+import StudentCourses from "./pages/StudentCourses";
+import StudentAssignments from "./pages/StudentAssignments";
+
+import StudentProfile from "./pages/StudentProfile";
+import StudentTest from "./pages/StudentTest";
+import StudentEnrollment from "./pages/StudentEnrollment";
+import TeacherCourses from "./pages/TeacherCourses";
+import TeacherMaterials from "./pages/TeacherMaterials";
+import TeacherGrading from "./pages/TeacherGrading";
+import TeacherTests from "./pages/TeacherTests";
+import AdminUsers from "./pages/AdminUsers";
+import AdminCourses from "./pages/AdminCourses";
+import AdminAnalytics from "./pages/AdminAnalytics";
+import AdminAnnouncements from "./pages/AdminAnnouncements";
+import AdminSettings from "./pages/AdminSettings";
 
 const queryClient = new QueryClient();
 
@@ -30,7 +45,16 @@ const App = () => (
             path="/student/*"
             element={
               <ProtectedRoute allowedRoles={["student"]}>
-                <StudentDashboard />
+                <Routes>
+                  <Route path="/" element={<StudentDashboard />} />
+                  <Route path="/courses" element={<StudentCourses />} />
+                  <Route path="/assignments" element={<StudentAssignments />} />
+
+                  <Route path="/profile" element={<StudentProfile />} />
+                  <Route path="/test" element={<StudentTest />} />
+                  <Route path="/enrollment" element={<StudentEnrollment />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
               </ProtectedRoute>
             }
           />
@@ -38,7 +62,14 @@ const App = () => (
             path="/teacher/*"
             element={
               <ProtectedRoute allowedRoles={["teacher"]}>
-                <TeacherDashboard />
+                <Routes>
+                  <Route path="/" element={<TeacherDashboard />} />
+                  <Route path="/courses" element={<TeacherCourses />} />
+                  <Route path="/materials" element={<TeacherMaterials />} />
+                  <Route path="/grading" element={<TeacherGrading />} />
+                  <Route path="/tests" element={<TeacherTests />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
               </ProtectedRoute>
             }
           />
@@ -46,7 +77,15 @@ const App = () => (
             path="/admin/*"
             element={
               <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminDashboard />
+                <Routes>
+                  <Route path="/" element={<AdminDashboard />} />
+                  <Route path="/users" element={<AdminUsers />} />
+                  <Route path="/courses" element={<AdminCourses />} />
+                  <Route path="/analytics" element={<AdminAnalytics />} />
+                  <Route path="/announcements" element={<AdminAnnouncements />} />
+                  <Route path="/settings" element={<AdminSettings />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
               </ProtectedRoute>
             }
           />

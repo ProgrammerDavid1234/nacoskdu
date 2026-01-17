@@ -38,7 +38,7 @@ const AdminDashboard = () => {
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
           <div>
             <h1 className="text-3xl font-display font-bold mb-2">Admin Dashboard 🛡️</h1>
-            <p className="text-muted-foreground">Monitor and manage the entire Uni Connect platform.</p>
+            <p className="text-muted-foreground">Monitor and manage the entire KDU NACOS CONNECT platform.</p>
           </div>
           <Button variant="hero" size="lg">
             <Bell className="w-4 h-4 mr-2" />
@@ -140,11 +140,10 @@ const AdminDashboard = () => {
                       </td>
                       <td className="py-4 px-4 text-sm text-muted-foreground">{user.email}</td>
                       <td className="py-4 px-4">
-                        <span className={`text-xs font-medium px-2 py-1 rounded ${
-                          user.role === "Teacher" 
-                            ? "bg-primary/10 text-primary" 
+                        <span className={`text-xs font-medium px-2 py-1 rounded ${user.role === "Teacher"
+                            ? "bg-primary/10 text-primary"
                             : "bg-secondary text-muted-foreground"
-                        }`}>
+                          }`}>
                           {user.role}
                         </span>
                       </td>
@@ -171,15 +170,14 @@ const AdminDashboard = () => {
             </div>
             <div className="space-y-4">
               {alerts.map((alert) => (
-                <div 
+                <div
                   key={alert.id}
-                  className={`p-4 rounded-lg border ${
-                    alert.type === "warning" 
-                      ? "bg-yellow-500/10 border-yellow-500/30" 
+                  className={`p-4 rounded-lg border ${alert.type === "warning"
+                      ? "bg-yellow-500/10 border-yellow-500/30"
                       : alert.type === "success"
-                      ? "bg-primary/10 border-primary/30"
-                      : "bg-secondary/50 border-border"
-                  }`}
+                        ? "bg-primary/10 border-primary/30"
+                        : "bg-secondary/50 border-border"
+                    }`}
                 >
                   <p className="text-sm text-foreground mb-1">{alert.message}</p>
                   <p className="text-xs text-muted-foreground">{alert.time}</p>
@@ -207,10 +205,9 @@ const AdminDashboard = () => {
               <div key={index} className="text-center p-6 rounded-xl bg-secondary/30">
                 <p className="text-3xl font-display font-bold text-foreground mb-1">{stat.value}</p>
                 <p className="text-sm text-muted-foreground mb-2">{stat.label}</p>
-                <span className={`text-xs font-medium ${
-                  stat.change.startsWith("+") ? "text-primary" : 
-                  stat.change.startsWith("-") ? "text-destructive" : "text-muted-foreground"
-                }`}>
+                <span className={`text-xs font-medium ${stat.change.startsWith("+") ? "text-primary" :
+                    stat.change.startsWith("-") ? "text-destructive" : "text-muted-foreground"
+                  }`}>
                   {stat.change}
                 </span>
               </div>
