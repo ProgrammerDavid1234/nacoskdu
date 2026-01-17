@@ -93,7 +93,7 @@ const StudentDashboard = () => {
                 >
                   <div className="flex items-center gap-4">
                     <div className={`w-2 h-2 rounded-full ${deadline.priority === "high" ? "bg-destructive" :
-                        deadline.priority === "medium" ? "bg-yellow-500" : "bg-primary"
+                      deadline.priority === "medium" ? "bg-yellow-500" : "bg-primary"
                       }`} />
                     <div>
                       <p className="font-medium text-foreground">{deadline.title}</p>
@@ -133,79 +133,79 @@ const StudentDashboard = () => {
                 </div>
               ))}
             </div>
-        </div>
-      </motion.div>
 
-      {/* Announcements */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.65 }}
-        className="p-6 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
-      >
-        <div className="flex items-center justify-between mb-4">
-          <h2 className="text-xl font-display font-semibold flex items-center gap-2 text-primary">
-            <Megaphone className="w-5 h-5" />
-            Announcements
-          </h2>
-        </div>
-        <div className="space-y-4">
-          {announcements.map((item) => (
-            <div key={item.id} className="p-3 rounded-lg bg-background/50 border border-primary/10">
-              <h3 className="font-semibold text-sm text-foreground mb-1">{item.title}</h3>
-              <p className="text-xs text-muted-foreground mb-2">{item.content}</p>
-              <p className="text-[10px] text-primary uppercase font-bold tracking-wider">{item.date}</p>
+          </motion.div>
+
+          {/* Announcements */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.65 }}
+            className="p-6 rounded-xl bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20"
+          >
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-xl font-display font-semibold flex items-center gap-2 text-primary">
+                <Megaphone className="w-5 h-5" />
+                Announcements
+              </h2>
             </div>
-          ))}
+            <div className="space-y-4">
+              {announcements.map((item) => (
+                <div key={item.id} className="p-3 rounded-lg bg-background/50 border border-primary/10">
+                  <h3 className="font-semibold text-sm text-foreground mb-1">{item.title}</h3>
+                  <p className="text-xs text-muted-foreground mb-2">{item.content}</p>
+                  <p className="text-[10px] text-primary uppercase font-bold tracking-wider">{item.date}</p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
-      </motion.div>
-    </div>
 
-        {/* Recent Courses */ }
-  <motion.div
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5, delay: 0.7 }}
-    className="p-6 rounded-xl bg-card border border-border/50"
-  >
-    <div className="flex items-center justify-between mb-6">
-      <h2 className="text-xl font-display font-semibold flex items-center gap-2">
-        <BookOpen className="w-5 h-5 text-primary" />
-        Your Courses
-      </h2>
-      <Button variant="ghost" size="sm" className="text-primary">
-        View All <ChevronRight className="w-4 h-4 ml-1" />
-      </Button>
-    </div>
-    <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-      {recentCourses.map((course) => (
-        <div
-          key={course.id}
-          className="p-5 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-pointer group"
+        {/* Recent Courses */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.7 }}
+          className="p-6 rounded-xl bg-card border border-border/50"
         >
-          <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+          <div className="flex items-center justify-between mb-6">
+            <h2 className="text-xl font-display font-semibold flex items-center gap-2">
               <BookOpen className="w-5 h-5 text-primary" />
-            </div>
-            <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">{course.code}</span>
+              Your Courses
+            </h2>
+            <Button variant="ghost" size="sm" className="text-primary">
+              View All <ChevronRight className="w-4 h-4 ml-1" />
+            </Button>
           </div>
-          <h3 className="font-medium text-foreground mb-3 line-clamp-2">{course.name}</h3>
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm">
-              <span className="text-muted-foreground">Progress</span>
-              <span className="text-foreground font-medium">{course.progress}%</span>
-            </div>
-            <div className="h-2 bg-secondary rounded-full overflow-hidden">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {recentCourses.map((course) => (
               <div
-                className="h-full bg-primary rounded-full transition-all duration-500"
-                style={{ width: `${course.progress}%` }}
-              />
-            </div>
+                key={course.id}
+                className="p-5 rounded-xl bg-secondary/30 hover:bg-secondary/50 border border-border/30 hover:border-primary/30 transition-all duration-300 cursor-pointer group"
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
+                    <BookOpen className="w-5 h-5 text-primary" />
+                  </div>
+                  <span className="text-xs font-medium text-primary bg-primary/10 px-2 py-1 rounded">{course.code}</span>
+                </div>
+                <h3 className="font-medium text-foreground mb-3 line-clamp-2">{course.name}</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Progress</span>
+                    <span className="text-foreground font-medium">{course.progress}%</span>
+                  </div>
+                  <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-primary rounded-full transition-all duration-500"
+                      style={{ width: `${course.progress}%` }}
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
-        </div>
-      ))}
-    </div>
-  </motion.div>
+        </motion.div>
       </div >
     </DashboardLayout >
   );
